@@ -1,3 +1,3 @@
 module.exports = {
-    uri: "mongodb+srv://jdsantil:Jbdeha5z*@cluster0.yhkrx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    uri: "mongodb+srv://jdsantil:<Password>@cluster0.yhkrx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
