@@ -4,6 +4,7 @@ module.exports = app =>{
 
     //Create new User
     router.post("/", users.create);
+    router.post("/login",users.login);
 
 
 

@@ -1,4 +1,4 @@
-
+const bcrypt = require('bcrypt')
 module.exports = mongoose => {
     const User = mongoose.model(
         "user",
@@ -13,5 +13,8 @@ module.exports = mongoose => {
             timestamps: true
         })
     )
+    User.validatePassword = (password) =>{
+            return bcrypt.compareSync(password, this.password);
+    }
     return User
 }
