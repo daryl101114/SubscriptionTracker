@@ -1,6 +1,8 @@
 const db = require('../../model/db.connect')
 const User = db.users;
 const bcrypt = require('bcrypt')
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 
 exports.create = async (req,res) =>{
     //check to see if fname is not null
@@ -40,13 +42,45 @@ exports.create = async (req,res) =>{
     }
 }
 
-exports.login = async (req, res) =>{
-    console.log(req.body.email)
-    let existingUser = await User.findOne({email: req.body.email})
-    //check if user exist in db
+// exports.login = async (req, res) =>{
+//     console.log(req.body.email)
+//     let existingUser = await User.findOne({email: req.body.email})
+//     //check if user exist in db
+//     if(!existingUser){
+//         res.status(400).send({message:"User not found"})
+//     }
+//     //validate the password
+//     let comparePass = await bcrypt.compareSync(req.body.password, existingUser.password)
+//     if (existingUser && comparePass){
+        
+//         res.status(200).send({message: "User found"})
+//         console.log(comparePass)
+//     }
+// }
+
+exports.login = passport.use(new LocalStrategy({
+    usernameField: 'email'}, 
+    async (username, password, done)=>{
+        console.log(username + " "+ password)
+    let existingUser = await User.findOne({email: username});
+
+    // if(err){return done(err);}
+
     if(!existingUser){
-        res.status(400).send({message:"User not found"})
+        return done(null, false, {message: 'Incorrect username'});
     }
-    //validate the password
-    // if (existingUser && existingUser.password == bcrypt.compareSync(password, this.password))
-}
+    // Validate Password
+    let isValidated = await bcrypt.compareSync(password, existingUser.password)
+   
+    if(!isValidated){
+        console.log(isValidated)
+        return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, existingUser);
+})),passport.serializeUser((user, done)=>{
+    done(null, user.id)
+}),passport.deserializeUser(async(id, done)=>{
+    await User.findById(id,(err,user)=>{
+        done(err, user);
+    })
+})

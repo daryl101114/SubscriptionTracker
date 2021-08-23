@@ -1,10 +1,25 @@
-let express = require('express')
+const express = require('express')
+const session = require('express-session')
 const db = require('./model/db.connect');
 const cors = require('cors')
+const passport = require('passport')
+const bodyParser = require("body-parser");
+
 let app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
