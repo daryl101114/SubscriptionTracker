@@ -7,6 +7,7 @@ module.exports = mongoose => {
             paymentDue: Date,
             cost: Number,
             status: String,
+            user: String
         })
     )   
 return Subscription
