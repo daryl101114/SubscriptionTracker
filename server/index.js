@@ -41,13 +41,10 @@ db.mongoose.connect(db.url,{
 
 //Initialize routes
 require('./api/route/user.routes')(app)
-
+require('./api/route/subscription.routes')(app)
 
 //Start the server
 let port = process.env.PORT || 3000
 app.listen(port, ()=>{
     console.log("The server is started", port)
 })
-
-
-//Comment test

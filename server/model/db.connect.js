@@ -7,5 +7,6 @@ db.mongoose = mongoose
 db.url = dbConfig.uri
 //MODELS
 db.users = require("./users.model.js")(mongoose)
+db.subscriptions = require('./subscription.model.js')(mongoose)
 
 module.exports = db
