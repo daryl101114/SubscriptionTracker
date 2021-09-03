@@ -1,5 +1,6 @@
 const passport = require("passport");
 
+
 module.exports = app =>{
     const users = require("../controller/user.controller.js")
     var router = require('express').Router();
@@ -7,9 +8,9 @@ module.exports = app =>{
     //Create new User
     router.post("/", users.create);
     router.post("/login",passport.authenticate('local',{
-        successRedirect: '/',
+        // successRedirect: '/',
         failureRedirect: '/login',
-        failureFlash: true
+        // failureFlash: false
     })
     );
 

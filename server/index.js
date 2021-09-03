@@ -7,8 +7,18 @@ const bodyParser = require("body-parser");
 
 let app = express()
 
+const corsOptions = {
+    allowed_origins: [
+        "http://localhost:3000"
+    ],
+    
+    allowedHeaders: 'Application/json'
+  }
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cors(corsOptions))
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -21,11 +31,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
 
-app.get('/',(req,res) =>{
-    res.send("HELLO WORLD")
-})
+// app.get('/',(req,res) =>{
+//     res.send("HELLO WORLD"),
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+// })
 
 //Connect to the database
 
@@ -44,7 +60,7 @@ require('./api/route/user.routes')(app)
 require('./api/route/subscription.routes')(app)
 
 //Start the server
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 5000
 app.listen(port, ()=>{
     console.log("The server is started", port)
 })

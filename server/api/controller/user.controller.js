@@ -67,7 +67,7 @@ exports.login = passport.use(new LocalStrategy({
 
         return done(null, false, { message: 'Incorrect password.' });
     }
-
+    console.log(existingUser)
     return done(null, existingUser);
     
 })),passport.serializeUser((user, done)=>{//stores the user ID into a session
