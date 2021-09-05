@@ -8,8 +8,8 @@ module.exports = app =>{
     //Create new User
     router.post("/", users.create);
     router.post("/login",passport.authenticate('local',{
-        // successRedirect: '/',
-        failureRedirect: '/login',
+        // successRedirect: 'http://localhost:5000/',
+        // failureRedirect: 'http://localhost:3000/login',
         // failureFlash: false
     })
     );

@@ -5,20 +5,14 @@ const cors = require('cors')
 const passport = require('passport')
 const bodyParser = require("body-parser");
 
-let app = express()
+const app = express()
 
-const corsOptions = {
-    allowed_origins: [
-        "http://localhost:3000"
-    ],
-    
-    allowedHeaders: 'Application/json'
-  }
-
+// var corsOptions = {
+//     origin: "http://localhost:3000"
+// }
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors(corsOptions))
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -27,6 +21,7 @@ app.use(session({
         expires: 600000
     }
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +31,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //     next();
 //   });
-
 
 // app.get('/',(req,res) =>{
 //     res.send("HELLO WORLD"),
@@ -55,6 +49,8 @@ db.mongoose.connect(db.url,{
     process.exit();
 })
 
+// console.log(cors(corsOptions))
+app.use(cors())
 //Initialize routes
 require('./api/route/user.routes')(app)
 require('./api/route/subscription.routes')(app)

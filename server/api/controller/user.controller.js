@@ -51,8 +51,7 @@ exports.create = async (req,res) =>{
 }}
 
 //Authenticate a user
-exports.login = passport.use(new LocalStrategy({
-    usernameField: 'email'}, 
+exports.login = passport.use(new LocalStrategy( 
     async (username, password, done)=>{
 
     let existingUser = await User.findOne({email: username});

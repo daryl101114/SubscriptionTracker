@@ -17,8 +17,7 @@ export default class Login extends Component{
     this.state = {
       username: '',
       password: ''
-    }
-  }
+    }}
 
   onChangeUsername(e){
     this.setState({
@@ -41,14 +40,13 @@ export default class Login extends Component{
     }
 
     console.log(user)
-    axios.post("localhost:5000/api/users/login", { user }).then(res =>{
-      console.log(res)
-      // console.log(res.data)
+    axios.post("http://localhost:5000/api/users/login", { user }).then(res =>{
+
+      console.log(res.data)
     }).catch(err =>{
       console.log(err)
     })
-    
-    // window.location = "/"
+    window.location = "/"
   }
   
  render() {
@@ -88,21 +86,20 @@ export default class Login extends Component{
     <div></div>
     </Col>
     <Col xs={6} md={4}>
-      <Form onSubmit={this.onSubmit}>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="username" placeholder="Enter email" value={this.state.username} onChange={this.onChangeUsername}/>
-    
-  </Form.Group>
+    <Form onSubmit={this.onSubmit}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Email address</Form.Label>
+      <Form.Control type="username" placeholder="Enter email" value={this.state.username} onChange={this.onChangeUsername}/>  
+    </Form.Group>
 
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.onChangePassword}/>
-  </Form.Group>
+    <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.onChangePassword}/>
+    </Form.Group>
   
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
+    <Button variant="primary" type="submit">
+      Submit
+    </Button>
 </Form>
     </Col>
     <Col xs={6} md={4}>
