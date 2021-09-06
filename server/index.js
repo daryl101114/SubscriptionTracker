@@ -4,12 +4,9 @@ const db = require('./model/db.connect');
 const cors = require('cors')
 const passport = require('passport')
 const bodyParser = require("body-parser");
-
+const flash = require('connect-flash')
 const app = express()
 
-// var corsOptions = {
-//     origin: "http://localhost:3000"
-// }
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -21,21 +18,14 @@ app.use(session({
         expires: 600000
     }
 }))
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-//   });
-
-// app.get('/',(req,res) =>{
-//     res.send("HELLO WORLD"),
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-// })
+app.get('/',(req,res) =>{
+    res.send("HELLO WORLD")
+})
 
 //Connect to the database
 

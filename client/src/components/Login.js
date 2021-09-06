@@ -40,13 +40,15 @@ export default class Login extends Component{
     }
 
     console.log(user)
-    axios.post("http://localhost:5000/api/users/login", { user }).then(res =>{
-
+    axios.post("http://localhost:5000/api/users/login", { username:user.username, password:user.password }).then(res =>{
       console.log(res.data)
+      
     }).catch(err =>{
       console.log(err)
     })
-    window.location = "/"
+
+
+    window.location = "/home"
   }
   
  render() {
