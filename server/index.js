@@ -2,7 +2,8 @@ const express = require('express')
 const session = require('express-session')
 const db = require('./model/db.connect');
 const cors = require('cors')
-const passport = require('passport')
+// const passport = require('passport')
+const passport = require('./service/passport/index')
 const bodyParser = require("body-parser");
 const flash = require('connect-flash')
 const app = express()
@@ -20,7 +21,7 @@ app.use(session({
 }))
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/',(req,res) =>{
