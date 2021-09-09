@@ -3,22 +3,22 @@ import Header from './components/Header';
 import Login from './components/Login'
 import Home from './components/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <BrowserRouter>
+      <Router>
         <Switch>
-        
-          <Route path="/" component={Login}/>
+        <Route path="/login" component={Login}/>
+          <Route path="/" component={Home}/>
           
-          <Route path="/home" component={Home}/>
           
-      
-        </Switch>
-      </BrowserRouter>
+          {/* <Route path="/home" component={Home}/> */}
+          
+      </Switch>
+      </Router>
     </div>
   );
 }

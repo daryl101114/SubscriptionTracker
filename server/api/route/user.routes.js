@@ -24,8 +24,22 @@ module.exports = app =>{
                     message: error || "Oops, Something happend",
                 });
             }
-            console.log("It works")
-            return res.json(user);
+            // console.log("It works")
+            req.logIn(user,(error)=>{
+
+                if(error){
+
+                    return res.status(500).json({
+                        message: error || "Something happened",
+                    })
+
+                }
+                user.isAuthenticated = true;
+                // console.log(user.isAuthenticated)
+                console.log(user + user.isAuthenticated)
+                //later don't send the user password to the client
+                return res.json(user)
+            })
         })(req, res, next)
     })
 
