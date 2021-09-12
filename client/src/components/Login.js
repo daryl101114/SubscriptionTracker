@@ -40,11 +40,17 @@ export default class Login extends Component{
     }
 
     // console.log(user)
-    axios.post("http://localhost:5000/api/users/login", { username:user.username, password:user.password })
+    axios.post("http://localhost:5000/api/users/login", { username:user.username, password:user.password },{
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
     .then(res =>{
       // console.log(res.data)
       console.log("data:", res.data)
-      this.props.history.push('/')
+    
+      this.props.history.push('/',res.data)
       
     }).catch(err =>{
       console.log("user and password combination is wrong")

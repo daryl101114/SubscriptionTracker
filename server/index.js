@@ -14,7 +14,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 // app.use(flash());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors())
+// app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    credentials: true
+  }));
 app.use(cookieSession({
     name: 'session',
     keys: ['key1', 'key2']

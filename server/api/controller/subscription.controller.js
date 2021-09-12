@@ -5,7 +5,7 @@ const Subscription = db.subscriptions
 exports.create = async (req, res)=>{
     //create an object that has all the information of a subscription
     if(!req.session.passport){
-        res.status(400).send("The process is not completed")
+        res.status(400).send("Unauthenticated user")
     }
     console.log(req.session)
     var subscription = new Subscription({
@@ -25,4 +25,19 @@ exports.create = async (req, res)=>{
         res.status(500).send({message: err.message || "Some error occured while adding a subscription"})
     })
     
+}
+
+exports.getAll = async (req,res) =>{
+    if(!req.session.passport){
+        res.status(400).send("Unauthenticated user")
+        console.log("unauthorized")
+    }
+    // console.log(req.session)
+
+     const subs = await Subscription.find()
+     try{
+         res.status(200).send(subs)
+     }catch (error) {
+         res.status(400).send(error)
+     }
 }

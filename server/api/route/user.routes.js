@@ -38,7 +38,7 @@ module.exports = app =>{
                 // console.log(user.isAuthenticated)
                 console.log(user + user.isAuthenticated)
                 //later don't send the user password to the client
-                return res.json(user)
+                return res.json(req.session.passport)
             })
         })(req, res, next)
     })
