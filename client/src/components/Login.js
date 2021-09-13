@@ -110,8 +110,9 @@ export default class Login extends Component{
     </Form.Group>
   
     <Button variant="primary" type="submit">
-      Submit
+      Login
     </Button>
+
 </Form>
     </Col>
     <Col xs={6} md={4}>
