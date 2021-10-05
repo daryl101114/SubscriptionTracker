@@ -15,7 +15,7 @@ exports.create = async (req, res)=>{
         paymentDue: req.body.paymentDue,
         cost: req.body.cost,
         status: req.body.status,
-        user:req.session.passport.user
+        // user:req.session.passport.user
     })
     //save the object to the database
     await subscription.save(subscription)
@@ -29,15 +29,16 @@ exports.create = async (req, res)=>{
 
 exports.getAll = async (req,res) =>{
     if(!req.session.passport){
-        res.status(400).send("Unauthenticated user")
+        res.status(401).send
         console.log("unauthorized")
     }
     // console.log(req.session)
-
+    else{
      const subs = await Subscription.find()
      try{
          res.status(200).send(subs)
      }catch (error) {
-         res.status(400).send(error)
+         res.status(500).send(error)
      }
+    }
 }

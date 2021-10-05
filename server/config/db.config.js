@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
-    uri: "mongodb+srv://jdsantil:Jbdeha5z*@cluster0.yhkrx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    uri: process.env.DATABASE_URI
 }

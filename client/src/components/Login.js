@@ -40,7 +40,7 @@ export default class Login extends Component{
     }
 
     // console.log(user)
-    axios.post("http://localhost:5000/api/users/login", { username:user.username, password:user.password },{
+    axios.get("http://localhost:3000/api/users/login", { username:user.username, password:user.password },{
       headers: {
         'Content-Type': 'application/json'
       },
@@ -48,9 +48,10 @@ export default class Login extends Component{
     })
     .then(res =>{
       // console.log(res.data)
-      console.log("data:", res.data)
+      // debugger
+      // console.log("data:", res.data)
     
-      this.props.history.push('/',res.data)
+      // this.props.history.push('/')
       
     }).catch(err =>{
       console.log("user and password combination is wrong")
@@ -109,7 +110,7 @@ export default class Login extends Component{
       <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.onChangePassword}/>
     </Form.Group>
   
-    <Button variant="primary" type="submit">
+    <Button variant="primary" onClick={this.onSubmit}>
       Submit
     </Button>
 </Form>

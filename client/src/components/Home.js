@@ -12,10 +12,20 @@ export default class Home extends Component{
 
     }
     componentDidMount(){
-        axios.get("http://localhost:5000/api/subscriptions/").then(res => {
+        axios.get("http://localhost:5000/api/subscriptions/",{headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        }).then(res => {
+            // debugger
             console.log(res.data)
         }).catch(err =>{
             console.log(err)
+        }).then(() => {
+            console.log('first: ', document.cookie.match("(^|;)\s" + "http://localhost:3000" + "\s=\s*([^;]+)"))
+            const re = new RegExp("session" + "=([^;]+)");
+const value = re.exec(document.cookie);
+console.log('second: ', value)
         })
     }
 

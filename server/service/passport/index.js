@@ -1,10 +1,11 @@
 const passport = require("passport");
 const db = require('../../model/db.connect')
 const User = db.users
+// const Auth0Strategy = require()
 
 passport.serializeUser((user, done)=>{//stores the user ID into a session
     // console.log(user.id)
-    done(null, user.email)
+    done(null, user)
 
 }),passport.deserializeUser((email, done)=>{
 
@@ -15,11 +16,11 @@ passport.serializeUser((user, done)=>{//stores the user ID into a session
 })
 
 //import all strategy here
-const SigninStrategy = require('./local.strategy')
+const SigninStrategy = require('./auth0.strategy')
 
 
 //use strategy here
-passport.use('local-signin', SigninStrategy)
+passport.use(SigninStrategy)
 
 
 module.exports = passport

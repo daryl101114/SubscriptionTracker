@@ -50,39 +50,13 @@ exports.create = async (req,res) =>{
     })
 }}
 
-//Authenticate a user
-// exports.login = passport.use(new LocalStrategy({
-//     // usernameField: 'email',
-//     // passReqToCallback: true
-// },
-//     async (username, password, done)=>{
 
-//     let existingUser = await User.findOne({username: username});
+//Check for loggedIn user
 
-//     if(!existingUser){
-//         // console.log("not found")
-//         return done(null, false, {message: 'Incorrect username'});
-//     }
-//     // Validate Password
-//     let isValidated = await bcrypt.compareSync(password, existingUser.password)
-
-//     if(!isValidated){
-//         console.log("wrong pass")
-//         return done(null, false, { message: 'Incorrect password.' });
-//     }
-
-//     console.log(existingUser)
-//     // console.log(done(null, existingUser));
-//     return done(null, existingUser);
-    
-// })),passport.serializeUser((user, done)=>{//stores the user ID into a session
-//     console.log(user.id)
-//     done(null, user.id)
-
-// }),passport.deserializeUser(async(id, done)=>{
-
-//     await User.findById(id,(err,user)=>{
-
-//         done(err, user);
-//     })
-// })
+exports.isLoggedIn = (req, res)=>{
+if(!req.user){
+    res.status(401).send("Failed")
+}
+console.log("Authorized")
+res.status(200).send("Success")
+}
