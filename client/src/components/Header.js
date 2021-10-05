@@ -1,29 +1,40 @@
-import React from 'react'
+import React,{ Component } from 'react'
 import "./Header.css"
-// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import IconButton from '@material-ui/core/IconButton';
 import logo from '../assets/mySub.png';
-// import AppBar from '@material-ui/core/AppBar'
-// import { Toolbar } from '@material-ui/core';
-// import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import axios from 'axios';
 
-function Header() {
+export default class Login extends Component{
+    constructor(props){
+        super(props);
+
+        this.onClick = this.onClick.bind(this)
+    }
+
+    onClick(e){
+        e.preventDefault();
+
+        axios.get("http://localhost:5000/api/users/logout",{
+            headers: {
+                'Content-Type': 'application/json'
+              },
+              withCredentials: true
+        }).then(res =>{
+            this.props.history.push('/login')
+            
+          }).catch(err =>{
+            console.log("Something went wrong!")
+            console.log(err)
+          })
+    }
+
+    render(){
     return (
         <div className="header">
-            {/* <AppBar position="static">
-            <Toolbar>
-                <img className="header_logo" src={logo}  alt="" />
-                <IconButton>
-                <AccountCircleIcon fontSize="large" className="header_icon" />
-                    <p>User</p>
-                </IconButton>
-                </Toolbar>
-            </AppBar> */}
             <Navbar bg="dark" variant="dark">
             {/* <Container>  */}
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/login">
                 <img
                 alt=""
                 src={logo}
@@ -48,6 +59,6 @@ function Header() {
         </div>
     )
 }
+}
 
-export default Header
 

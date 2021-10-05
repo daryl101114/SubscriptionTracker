@@ -81,6 +81,16 @@ module.exports = app =>{
 
     // })
 
+    router.get("/logout", (req,res,next)=>{
+        try {
+            req.logOut();
+            return res.status(200)
+            console.log("logging out")
+        } catch (error) {
+            console.log(error)
+        }
+        (req,res,next)
+    })
 
 
     app.use('/api/users', router)
