@@ -1,5 +1,5 @@
-require('dotenv').config()
+require("dotenv").config();
 
 module.exports = {
-    uri: process.env.DATABASE_URI
-}
+  uri: process.env.DATABASE_URI,
+};
