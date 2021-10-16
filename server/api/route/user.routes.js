@@ -14,6 +14,7 @@ module.exports = (app) => {
     "/login",
     passport.authenticate("auth0", {
       scope: "openid email profile",
+
     }),
     (req, res) => {
       res.redirect("/");
@@ -33,54 +34,12 @@ module.exports = (app) => {
           return next(err);
         }
         const returnTo = req.session.returnTo;
+        // console.log(returnTo)
         delete req.session.returnTo;
         res.redirect(returnTo || "/");
       });
     })(req, res, next);
   });
-  // router.post('/login', (req, res, next)=>{
-
-  //     passport.authenticate('local-signin', (error, user, info)=>{
-
-  //         if(error){
-
-  //             res.send(500).json({
-
-  //                 message: error || "Oops, Something happend",
-
-  //             });
-
-  //         }
-
-  //         // console.log("It works")
-
-  //         req.logIn(user,(error)=>{
-
-  //             if(error){
-
-  //                 return res.status(500).json({
-
-  //                     message: error || "Something happened",
-
-  //                 })
-
-  //             }
-  //             user.isAuthenticated = true;
-
-  //             // console.log(user.isAuthenticated)
-
-  //             console.log(user + user.isAuthenticated)
-
-  //             // return res.json(req.session.passport)
-  //             // return res.send()
-
-  //             return res.json(req.session.passport)
-
-  //         })
-
-  //     })(req, res, next)
-
-  // })
 
   router.get("/logout", (req, res, next) => {
     try {
