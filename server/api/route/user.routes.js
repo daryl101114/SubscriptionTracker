@@ -6,19 +6,13 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   //Create new User
-  router.post("/", users.create);
+  router.post("/register", users.create);
 
   // router.get("/isLoggedIn",users.isLoggedIn)
 
-  router.get(
+  router.post(
     "/login",
-    passport.authenticate("auth0", {
-      scope: "openid email profile",
-
-    }),
-    (req, res) => {
-      res.redirect("/");
-    }
+    users.login
   );
 
   router.get("/callback", (req, res, next) => {
