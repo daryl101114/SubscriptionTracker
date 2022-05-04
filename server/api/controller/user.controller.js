@@ -54,7 +54,8 @@ exports.login = async (req, res) => {
 }
 //logout
 exports.logout = async (req, res) => {
-
+  //clears all cookies for the user
+  res.status(200).send({ message: "Log out Success" })
 }
 
 

@@ -1,55 +1,59 @@
 <template>
   <div class="col-md-3">
-      <h1>Login</h1>
-  <div class="container">
-      <el-input
-  placeholder="Email address"
-  v-model="email"
-  clearable>
-</el-input>
- <el-input
-  placeholder="Password"
-  v-model="password"
-  clearable>
-</el-input>
+    <h1>Login</h1>
+    <div class="container">
+      <el-input placeholder="Email address" v-model="email" clearable>
+      </el-input>
+      <el-input placeholder="Password" v-model="password" clearable> </el-input>
 
-<p>Don't have an account? <el-link href="http://localhost:8080/">Register</el-link></p>
-<div class="loginButton">
- <el-button type="primary">Login</el-button>
- </div>
- </div>
+      <p>
+        Don't have an account?
+        <el-link href="http://localhost:8080/">Register</el-link>
+      </p>
+      <div class="loginButton">
+        <el-button @click="handleLogin" type="primary">Login</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {Input,Form,Button,Link} from 'element-ui';
+import { Input, Form, Button, Link } from "element-ui";
+import authState from "@/store/store.js";
 // import 'element-ui/lib/theme-chalk/reset.css'
 export default {
-components:{
+  components: {
     [Button.name]: Button,
     [Input.name]: Input,
     [Form.name]: Form,
     [Link.name]: Link
-},
- data() {
+  },
+  data() {
     return {
-      email: '',
-      password:''
+      email: "",
+      password: ""
     };
   },
-  methods:{
+  methods: {
+    async handleLogin() {
+      //call the store to login
+      const userData = {
+        email: this.email,
+        password: this.password
+      };
+      await this.$store.disptatch("setLogin", userData);
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-
-.container{
+.container {
   position: flex;
   width: 250px;
-  margin: auto
+  margin: auto;
 }
-.loginButton{
-  margin-top: 10px
+.loginButton {
+  margin-top: 10px;
 }
 </style>
